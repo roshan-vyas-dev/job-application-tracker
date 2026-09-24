@@ -2,26 +2,32 @@ import { useState } from "react";
 import ApplicationList from "./components/ApplicationList/ApplicationList";
 function App() {
   const [search, setSearch] = useState("");
-  const applications = [
-    {
-      id: 1,
-      company: "Google",
-      position: "Frontend Developer",
-      status: "Applied",
-      appliedDate: "2026-09-20",
-    },
-    {
-      id: 2,
-      company: "Microsoft",
-      position: "React Developer",
-      status: "Interview",
-      appliedDate: "2026-09-18",
-    },
-  ];
+  const [applications, setApplications] = useState([
+  {
+    id: 1,
+    company: "Google",
+    position: "Frontend Developer",
+    status: "Applied",
+    appliedDate: "2026-09-20",
+  },
+  {
+    id: 2,
+    company: "Microsoft",
+    position: "React Developer",
+    status: "Interview",
+    appliedDate: "2026-09-18",
+  },
+]);
 
   const filteredApplications = applications.filter((application) =>
     application.company.toLowerCase().includes(search.toLowerCase()),
   );
+
+  const handleDelete = (id) => {
+    setApplications((currentApplications) =>
+      currentApplications.filter((application) => application.id !== id),
+    );
+  };
 
   return (
     <div>
@@ -31,7 +37,7 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <ApplicationList applications={filteredApplications} />
+      <ApplicationList applications={filteredApplications} onDelete={handleDelete} />
     </div>
   );
 }

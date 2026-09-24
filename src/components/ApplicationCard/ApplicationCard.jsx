@@ -1,5 +1,4 @@
-
-function ApplicationCard({application}) {
+function ApplicationCard({ application,onDelete }) {
   return (
     <div>
       <h2>{application.company}</h2>
@@ -7,9 +6,9 @@ function ApplicationCard({application}) {
       <p>{application.status}</p>
       <p>{application.appliedDate}</p>
 
-
+      <button onClick={() =>onDelete(application.id)}>Delete</button>
     </div>
-  )
+  );
 }
 
-export default ApplicationCard
+export default ApplicationCard;
