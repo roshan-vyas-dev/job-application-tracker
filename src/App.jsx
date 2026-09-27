@@ -47,9 +47,10 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      <button onClick={() => setSearch("")}>Clear</button>
 
       <p>Applications: {filteredApplications.length}</p>
-      
+
       <ApplicationList
         applications={filteredApplications}
         onDelete={handleDelete}
