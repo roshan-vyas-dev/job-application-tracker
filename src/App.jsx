@@ -47,7 +47,12 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button onClick={() => setSearch("")}>Clear</button>
+      <button
+        onClick={() => setSearch("")}
+        disabled={!search}
+        className="disabled:opacity-50 disabled:cursor-not-allowed" >
+        Clear
+      </button>
 
       <p>Applications: {filteredApplications.length}</p>
 
