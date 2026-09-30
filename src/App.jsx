@@ -50,11 +50,29 @@ function App() {
       <button
         onClick={() => setSearch("")}
         disabled={!search}
-        className="disabled:opacity-50 disabled:cursor-not-allowed" >
+        className="disabled:opacity-50 disabled:cursor-not-allowed"
+      >
         Clear
       </button>
 
       <p>Applications: {filteredApplications.length}</p>
+
+      <p>
+        Applied:{" "}
+        {
+          applications.filter((application) => application.status === "Applied")
+            .length
+        }
+      </p>
+
+      <p>
+        Interview:{" "}
+        {
+          applications.filter(
+            (application) => application.status === "Interview",
+          ).length
+        }
+      </p>
 
       <ApplicationList
         applications={filteredApplications}
