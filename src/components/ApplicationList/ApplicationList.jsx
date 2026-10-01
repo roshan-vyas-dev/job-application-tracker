@@ -2,7 +2,7 @@ import ApplicationCard from "../ApplicationCard/ApplicationCard"
 
 function ApplicationList({applications,onDelete,onStatusChange}) {
     if (applications.length === 0) {
-    return <p>No applications found.</p>;
+   return <p>No applications match your search.</p>;
   }
   return (
     <div>
