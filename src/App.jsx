@@ -2,6 +2,7 @@ import { useState } from "react";
 import ApplicationList from "./components/ApplicationList/ApplicationList";
 function App() {
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
   const [applications, setApplications] = useState([
     {
       id: 1,
@@ -19,9 +20,11 @@ function App() {
     },
   ]);
 
-  const filteredApplications = applications.filter((application) =>
-    application.company.toLowerCase().includes(search.toLowerCase()),
-  );
+ const filteredApplications = applications.filter(
+  (application) =>
+    application.company.toLowerCase().includes(search.toLowerCase()) &&
+    (statusFilter === "All" || application.status === statusFilter)
+);
 
   const handleDelete = (id) => {
     setApplications((currentApplications) =>
@@ -47,6 +50,17 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      <select
+  value={statusFilter}
+  onChange={(e) => setStatusFilter(e.target.value)}
+>
+  <option value="All">All Statuses</option>
+  <option value="Applied">Applied</option>
+  <option value="Reviewing">Reviewing</option>
+  <option value="Interview">Interview</option>
+  <option value="Hired">Hired</option>
+  <option value="Rejected">Rejected</option>
+</select>
       <button
         onClick={() => setSearch("")}
         disabled={!search}
