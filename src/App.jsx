@@ -3,6 +3,7 @@ import ApplicationList from "./components/ApplicationList/ApplicationList";
 function App() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [sortOrder, setSortOrder] = useState("newest");
   const [applications, setApplications] = useState([
     {
       id: 1,
@@ -20,11 +21,18 @@ function App() {
     },
   ]);
 
- const filteredApplications = applications.filter(
-  (application) =>
-    application.company.toLowerCase().includes(search.toLowerCase()) &&
-    (statusFilter === "All" || application.status === statusFilter)
-);
+const filteredApplications = applications
+  .filter(
+    (application) =>
+      application.company.toLowerCase().includes(search.toLowerCase()) &&
+      (statusFilter === "All" || application.status === statusFilter)
+  )
+  .sort((a, b) => {
+    const dateA = new Date(a.appliedDate);
+    const dateB = new Date(b.appliedDate);
+
+    return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+  });
 
   const handleDelete = (id) => {
     setApplications((currentApplications) =>
@@ -61,6 +69,16 @@ function App() {
   <option value="Hired">Hired</option>
   <option value="Rejected">Rejected</option>
 </select>
+
+<select
+  value={sortOrder}
+  onChange={(e) => setSortOrder(e.target.value)}
+>
+  <option value="newest">Newest first</option>
+  <option value="oldest">Oldest first</option>
+</select>
+
+
       <button
         onClick={() => setSearch("")}
         disabled={!search}
