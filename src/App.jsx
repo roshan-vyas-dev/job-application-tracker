@@ -87,6 +87,16 @@ const filteredApplications = applications
         Clear
       </button>
 
+      <button
+  onClick={() => {
+    setSearch("");
+    setStatusFilter("All");
+    setSortOrder("newest");
+  }}
+>
+  Reset Filters
+</button>
+
       <p>Applications: {filteredApplications.length}</p>
 
       <p>
